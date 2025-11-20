@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://yfkqn3dcvg5o"]
+
+[ext_resource type="Texture2D" uid="uid://cu8p4clmxi70o" path="res://quarto-viajante.png" id="1_bce23"]
+[ext_resource type="Script" path="res://Cena08_QuartoFinal.gd" id="1_l88h3"]
+[ext_resource type="Texture2D" uid="uid://c27mlfm6v4yvk" path="res://cientista.png" id="2_27dxi"]
+[ext_resource type="Texture2D" uid="uid://n31ee3805lok" path="res://balao-fala.png" id="3_go6wm"]
+[ext_resource type="Texture2D" uid="uid://cyxgry3g60vlh" path="res://portal.png" id="4_k3pea"]
+
+[node name="Cena08_QuartoFinal" type="Node2D"]
+script = ExtResource("1_l88h3")
+
+[node name="QuartoFundo" type="Sprite2D" parent="."]
+position = Vector2(453, 383.25)
+scale = Vector2(1.22461, 1.29882)
+texture = ExtResource("1_bce23")
+
+[node name="BruxoSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(856, 504)
+scale = Vector2(0.82, 0.756)
+texture = ExtResource("2_27dxi")
+
+[node name="UIScript" type="CanvasLayer" parent="."]
+
+[node name="BalaoFala" type="TextureRect" parent="UIScript"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -389.0
+offset_top = -234.0
+offset_right = 323.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_go6wm")
+
+[node name="NomePersonagemLabel" type="Label" parent="UIScript/BalaoFala"]
+layout_mode = 0
+offset_left = 347.0
+offset_top = -18.0
+offset_right = 392.0
+offset_bottom = 5.0
+horizontal_alignment = 1
+
+[node name="TextoDialogoLabel" type="RichTextLabel" parent="UIScript/BalaoFala"]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 46.0
+offset_right = 628.0
+offset_bottom = 159.0
+
+[node name="AvancarButton" type="Button" parent="UIScript/BalaoFala"]
+layout_mode = 0
+offset_left = 574.0
+offset_top = 191.0
+offset_right = 645.0
+offset_bottom = 222.0
+text = "Avançar"
+
+[node name="PortalSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(872.5, 537.5)
+scale = Vector2(0.642293, 0.74625)
+texture = ExtResource("4_k3pea")
+
+[node name="ClaraoFundo" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ViajanteSprite" type="Sprite2D" parent="."]
+position = Vector2(222, 512)
+scale = Vector2(0.86, 0.864)
+texture = ExtResource("2_27dxi")

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr6pmp2rjbrb7"]
+
+[ext_resource type="Script" path="res://CasaInterativa.gd" id="1_tufor"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3d7cn"]
+size = Vector2(30, 34)
+
+[node name="CasaInterativa" type="Area2D"]
+script = ExtResource("1_tufor")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3d7cn")

@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://5sb02706gg45"]
+
+[ext_resource type="Texture2D" uid="uid://clhhmuf70drs7" path="res://igreja.png" id="1_68m4o"]
+[ext_resource type="Script" path="res://Cena06_MedicoIgreja.gd" id="1_75jvj"]
+[ext_resource type="Texture2D" uid="uid://n31ee3805lok" path="res://balao-fala.png" id="2_aoeyp"]
+[ext_resource type="Texture2D" uid="uid://cjxpemysdv0e5" path="res://medico.png" id="4_j5suw"]
+[ext_resource type="FontFile" uid="uid://djy146x3wurjd" path="res://fonts/Minecraftia-Regular.ttf" id="5_3eklc"]
+[ext_resource type="AudioStream" uid="uid://bg8q8vmwkhtj8" path="res://musica-medieval.mp3" id="6_56g8w"]
+[ext_resource type="Texture2D" uid="uid://dox3rl6yvw1cx" path="res://viajante.png" id="6_ua7ly"]
+
+[node name="Cena06_MedicoIgreja" type="Node2D"]
+script = ExtResource("1_75jvj")
+
+[node name="IgrejaCenario" type="Sprite2D" parent="."]
+position = Vector2(471, 287)
+texture = ExtResource("1_68m4o")
+
+[node name="MedicoSprite" type="Sprite2D" parent="."]
+position = Vector2(869, 550)
+scale = Vector2(0.870098, 0.903595)
+texture = ExtResource("4_j5suw")
+
+[node name="UIScript" type="CanvasLayer" parent="."]
+
+[node name="BalaoFala" type="TextureRect" parent="UIScript"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -389.0
+offset_top = -234.0
+offset_right = 323.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_aoeyp")
+
+[node name="NomePersonagemLabel" type="Label" parent="UIScript/BalaoFala"]
+layout_mode = 0
+offset_left = 376.0
+offset_top = -18.0
+offset_right = 421.0
+offset_bottom = 5.0
+theme_override_fonts/font = ExtResource("5_3eklc")
+horizontal_alignment = 1
+
+[node name="TextoDialogoLabel" type="RichTextLabel" parent="UIScript/BalaoFala"]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 46.0
+offset_right = 628.0
+offset_bottom = 159.0
+theme_override_fonts/normal_font = ExtResource("5_3eklc")
+
+[node name="AvancarButton" type="Button" parent="UIScript/BalaoFala"]
+layout_mode = 0
+offset_left = 574.0
+offset_top = 191.0
+offset_right = 645.0
+offset_bottom = 222.0
+text = "Avançar"
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_56g8w")
+autoplay = true
+
+[node name="ViajanteSprite" type="Sprite2D" parent="."]
+position = Vector2(179, 544)
+scale = Vector2(0.388898, 0.382688)
+texture = ExtResource("6_ua7ly")

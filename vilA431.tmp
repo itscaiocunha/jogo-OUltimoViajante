@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpgfy00o0er5k"]
+
+[ext_resource type="Texture2D" uid="uid://csayuarq84n1u" path="res://vilarejo.jpeg" id="1_gf7xy"]
+[ext_resource type="PackedScene" uid="uid://mlnpfn36xi14" path="res://personagem.tscn" id="2_f6tsf"]
+[ext_resource type="PackedScene" uid="uid://dr6pmp2rjbrb7" path="res://CasaInterativa.tscn" id="3_ltrcd"]
+[ext_resource type="PackedScene" path="res://NivelReceita.tscn" id="4_627x3"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_fmq10"]
+vertices = PackedVector2Array(229, 545.789, 109.344, 548.313, 111.313, 546.906, 217.438, 544.023, 230.109, 545.828, 93.75, 405, 94.6563, 368.617, 106.477, 372.438, 108.672, 404.039, 609.797, 222.844, 622.063, 221.313, 623.047, 402.953, 605.781, 405.047, 143.453, 204.727, 139.492, 116.75, 148.633, 117.383, 154.68, 203, 31.1172, 205.344, 30.1094, 109.93, 44.1797, 111.172, 46.2109, 207.258, 253.219, 203, 251.227, 112.57, 267, 113.453, 267, 203.594, 364.211, 413.031, 11.7578, 412.031, 12.2813, 405, 358.063, 402.961, 372.758, 413.023, 13.7031, 211.148, 14.25, 203.227, 402, 565.094, 402, 585.609, 360.156, 584, 360.789, 577.094, 376.242, 556.961, 229, 584.922, 234.273, 575.922, 804.641, 403.938, 804.352, 412.023, 358, 207.43, 358, 12.2813, 374, 12.7266, 374, 403.953, 627, 557.961, 627, 563.078, 356.938, 216.141)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24), PackedInt32Array(25, 26, 27, 5), PackedInt32Array(25, 5, 8, 28, 29), PackedInt32Array(30, 31, 17, 20), PackedInt32Array(32, 33, 34, 35, 36), PackedInt32Array(37, 0, 4, 38), PackedInt32Array(34, 37, 38, 35), PackedInt32Array(11, 39, 40, 12), PackedInt32Array(41, 42, 43, 44), PackedInt32Array(36, 45, 46, 32), PackedInt32Array(36, 35, 25, 29), PackedInt32Array(44, 29, 28, 47, 41), PackedInt32Array(47, 30, 20, 13), PackedInt32Array(47, 13, 16, 21, 24), PackedInt32Array(47, 24, 41), PackedInt32Array(40, 29, 44, 12)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(348, 2, 384, 3, 384, 394, 596, 395, 600, 214, 632, 210, 633, 393, 815, 394, 814, 422, 383, 423, 386, 547, 637, 548, 637, 573, 412, 575, 412, 596, 360, 594, 219, 595, 219, 556, 77, 559, 108, 537, 218, 534, 239, 537, 243, 566, 351, 567, 354, 423, 1, 422, 3, 395, 84, 395, 85, 355, 116, 365, 118, 394, 348, 393, 347, 226, 3, 221, 5, 192, 21, 194, 20, 99, 54, 102, 56, 197, 133, 195, 129, 106, 158, 108, 164, 193, 243, 193, 241, 102, 277, 104, 277, 194, 348, 197)])
+
+[node name="vilarejo" type="Node2D" groups=["vilarejo"]]
+
+[node name="Vilarejo" type="Sprite2D" parent="."]
+position = Vector2(411, 298)
+texture = ExtResource("1_gf7xy")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Vilarejo"]
+position = Vector2(-411, -298)
+navigation_polygon = SubResource("NavigationPolygon_fmq10")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_f6tsf")]
+position = Vector2(364, 31)
+
+[node name="CasaInterativa" parent="." instance=ExtResource("3_ltrcd")]
+position = Vector2(102, 346)
+target_scene = ExtResource("4_627x3")

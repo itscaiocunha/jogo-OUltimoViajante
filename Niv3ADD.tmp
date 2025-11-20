@@ -1,0 +1,93 @@
+[gd_scene load_steps=11 format=3 uid="uid://h53tax5i7xh1"]
+
+[ext_resource type="Script" path="res://NivelClickPoint.gd" id="1_nfpyj"]
+[ext_resource type="Texture2D" uid="uid://bgvd8163tmps3" path="res://background_task2.png" id="2_1idxh"]
+[ext_resource type="PackedScene" path="res://ItemClicavel.tscn" id="3_7faj8"]
+[ext_resource type="Texture2D" uid="uid://26v5nkmjeitx" path="res://aldeao01.png" id="4_00i2c"]
+[ext_resource type="Texture2D" uid="uid://dw2c0ivsxpuya" path="res://aldeao04.png" id="5_7bra2"]
+[ext_resource type="Texture2D" uid="uid://dkluwqtkis78v" path="res://aldeao03.png" id="7_144ll"]
+[ext_resource type="Texture2D" uid="uid://b8fmrkbtbcm2e" path="res://aldeao-doente.png" id="7_m8dgk"]
+[ext_resource type="Texture2D" uid="uid://vk1s7x551ssp" path="res://aldeao02.png" id="8_t3mtd"]
+[ext_resource type="Texture2D" uid="uid://ba6i6b2kov3ae" path="res://lixo-chao.png" id="9_snxdq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1y7ms"]
+bg_color = Color(0.6, 0.6, 0.6, 0.196078)
+
+[node name="NivelClickPoint" type="Node2D"]
+script = ExtResource("1_nfpyj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.74902)
+position = Vector2(513.25, 386.499)
+scale = Vector2(1.00049, 1.33979)
+texture = ExtResource("2_1idxh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1y7ms")
+
+[node name="LixoCounterLabel" type="Label" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+text = "Lixos: 0 / 7"
+
+[node name="ListaQuestContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+
+[node name="Doente1" type="Label" parent="CanvasLayer/PanelContainer/ListaQuestContainer"]
+layout_mode = 2
+text = "Doente 01"
+
+[node name="Doente2" type="Label" parent="CanvasLayer/PanelContainer/ListaQuestContainer"]
+layout_mode = 2
+text = "Doente 02"
+
+[node name="Doente 3" type="Label" parent="CanvasLayer/PanelContainer/ListaQuestContainer"]
+layout_mode = 2
+text = "Doente 03
+"
+
+[node name="Doente 4" type="Label" parent="CanvasLayer/PanelContainer/ListaQuestContainer"]
+layout_mode = 2
+text = "Doente 04
+"
+
+[node name="Doente 5" type="Label" parent="CanvasLayer/PanelContainer/ListaQuestContainer"]
+layout_mode = 2
+text = "Doente 05
+"
+
+[node name="ItemClicavel" parent="CanvasLayer/PanelContainer/ListaQuestContainer" instance=ExtResource("3_7faj8")]
+position = Vector2(170, 671)
+scale = Vector2(2, 2)
+item_name = "Doente 01"
+texture = ExtResource("4_00i2c")
+
+[node name="ItemClicavel2" parent="CanvasLayer/PanelContainer/ListaQuestContainer" instance=ExtResource("3_7faj8")]
+position = Vector2(608, 553)
+item_name = "Doente 03"
+texture = ExtResource("5_7bra2")
+
+[node name="ItemClicavel4" parent="CanvasLayer/PanelContainer/ListaQuestContainer" instance=ExtResource("3_7faj8")]
+position = Vector2(447, 563)
+item_name = "Doente 05"
+texture = ExtResource("7_m8dgk")
+
+[node name="ItemClicavel5" parent="CanvasLayer/PanelContainer/ListaQuestContainer" instance=ExtResource("3_7faj8")]
+position = Vector2(729, 616)
+scale = Vector2(2, 2)
+item_name = "Doente 02"
+texture = ExtResource("7_144ll")
+
+[node name="ItemClicavel6" parent="CanvasLayer/PanelContainer/ListaQuestContainer" instance=ExtResource("3_7faj8")]
+position = Vector2(558, 542)
+scale = Vector2(0.49, 0.49)
+item_name = "Doente 04"
+texture = ExtResource("8_t3mtd")
+
+[node name="ItemClicavel" parent="." instance=ExtResource("3_7faj8")]
+position = Vector2(337, 672)
+item_name = "lixo"
+texture = ExtResource("9_snxdq")

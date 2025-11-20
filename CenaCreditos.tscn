@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://h7wbvjrnmybp"]
+
+[ext_resource type="Script" path="res://CreditosLabel.gd" id="1_xr3bs"]
+[ext_resource type="AudioStream" uid="uid://bdm8ghf1ksmnw" path="res://musica-fundo.mp3" id="2_mpy05"]
+[ext_resource type="FontFile" uid="uid://djy146x3wurjd" path="res://fonts/Minecraftia-Regular.ttf" id="2_pqmfh"]
+
+[node name="CenaCreditos" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xr3bs")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(20, 20)
+color = Color(0, 0, 0, 1)
+
+[node name="CreditosLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(600, 800)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 48.0
+offset_right = 300.0
+offset_bottom = 848.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("2_pqmfh")
+theme_override_font_sizes/normal_font_size = 24
+text = "O ÚLTIMO VIAJANTE
+
+Desenvolvimento e Direção: Caio Grilo da Cunha
+
+Roteiro: Haryel Araújo de Oliveira Caliari
+
+Design Visual: Gian Carlos de Freitas Moroni
+
+Diretora Criativa: Jackeline Ayumi Kanekiyo
+
+Financiamento: UNIFEOB
+
+OBRIGADO POR JOGAR!"
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_mpy05")
+autoplay = true

@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://chym5quran4pa"]
+
+[ext_resource type="Script" path="res://Cena02_Medieval.gd" id="1_ea10j"]
+[ext_resource type="Texture2D" uid="uid://n31ee3805lok" path="res://balao-fala.png" id="1_ifika"]
+[ext_resource type="Texture2D" uid="uid://5wynbn8xg3ko" path="res://vilarejo.png" id="2_fkkqw"]
+[ext_resource type="FontFile" uid="uid://djy146x3wurjd" path="res://fonts/Minecraftia-Regular.ttf" id="3_yobew"]
+[ext_resource type="Texture2D" uid="uid://c27mlfm6v4yvk" path="res://cientista.png" id="4_u2que"]
+[ext_resource type="AudioStream" uid="uid://bg8q8vmwkhtj8" path="res://musica-medieval.mp3" id="5_birm4"]
+[ext_resource type="Texture2D" uid="uid://dox3rl6yvw1cx" path="res://viajante.png" id="5_h437j"]
+
+[node name="Cena02_Medieval" type="Node2D"]
+script = ExtResource("1_ea10j")
+
+[node name="UIScript" type="CanvasLayer" parent="."]
+
+[node name="BalaoFala" type="TextureRect" parent="UIScript"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -389.0
+offset_top = -234.0
+offset_right = 323.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_ifika")
+
+[node name="NomePersonagemLabel" type="Label" parent="UIScript/BalaoFala"]
+layout_mode = 0
+offset_left = 376.0
+offset_top = -18.0
+offset_right = 421.0
+offset_bottom = 5.0
+theme_override_fonts/font = ExtResource("3_yobew")
+horizontal_alignment = 1
+
+[node name="TextoDialogoLabel" type="RichTextLabel" parent="UIScript/BalaoFala"]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 46.0
+offset_right = 628.0
+offset_bottom = 159.0
+theme_override_fonts/normal_font = ExtResource("3_yobew")
+
+[node name="AvancarButton" type="Button" parent="UIScript/BalaoFala"]
+layout_mode = 0
+offset_left = 574.0
+offset_top = 191.0
+offset_right = 645.0
+offset_bottom = 222.0
+text = "Avançar"
+
+[node name="FundoVila" type="Sprite2D" parent="."]
+position = Vector2(528, 386)
+scale = Vector2(1.03125, 1.05205)
+texture = ExtResource("2_fkkqw")
+
+[node name="BruxoSprite" type="Sprite2D" parent="."]
+position = Vector2(856, 504)
+scale = Vector2(0.82, 0.756)
+texture = ExtResource("4_u2que")
+
+[node name="ViajanteSprite" type="Sprite2D" parent="."]
+position = Vector2(188, 534)
+scale = Vector2(0.388898, 0.382688)
+texture = ExtResource("5_h437j")
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_birm4")
+autoplay = true

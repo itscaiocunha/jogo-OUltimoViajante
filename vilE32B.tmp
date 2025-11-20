@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpgfy00o0er5k"]
+
+[ext_resource type="Texture2D" uid="uid://csayuarq84n1u" path="res://vilarejo.jpeg" id="1_gf7xy"]
+[ext_resource type="PackedScene" uid="uid://mlnpfn36xi14" path="res://personagem.tscn" id="2_f6tsf"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1eqyk"]
+vertices = PackedVector2Array(-28.8516, 274.742, -29.0625, 274.727, -29.1094, 272.891, -28.4219, 272.883)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-65, -301, -42, 277, -36, -290, -41, 112, 204, 108, 207, -89, 208, 106, 403, 112, -411, 108, -308, 108, -308, 60, -312, 107, -44, 112, -39, 277, -181, 282, -186, 245, -327, 246, -186, 249, -182, 280, -21, 285, -17, 268, 249, 260, -39, 263, -50, -90, -154, -93, -154, -187, -154, -87, -264, -89, -264, -185, -266, -89, -381, -92, -377, -197, -378, -193, -382, -88, -152, -84, -44, -90, -50, -229, -60.3981, -254.761), PackedVector2Array(-49, -292, -47, -268, -57, -300, -59, -292), PackedVector2Array(-52, -247, -60, -299, -33, -299, -36, -290, -50, -291, -46, -283, -42, -276, -61, -271, -63, -271, -52, -270, -44, -264)])
+
+[node name="vilarejo" type="Node2D" groups=["vilarejo"]]
+
+[node name="Vilarejo" type="Sprite2D" parent="."]
+position = Vector2(411, 298)
+texture = ExtResource("1_gf7xy")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Vilarejo"]
+navigation_polygon = SubResource("NavigationPolygon_1eqyk")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_f6tsf")]
+position = Vector2(305, -26)
