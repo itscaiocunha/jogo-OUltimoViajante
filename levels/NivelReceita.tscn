@@ -1,0 +1,137 @@
+[gd_scene load_steps=25 format=3 uid="uid://b0vi6re7hsdeb"]
+
+[ext_resource type="Texture2D" uid="uid://bilfgbm2q3e2p" path="res://assets/cenario.png" id="1_1vveq"]
+[ext_resource type="Texture2D" uid="uid://dfoevcn5hhyyb" path="res://assets/jarro.png" id="2_4r4bf"]
+[ext_resource type="Script" path="res://levels/JarroAlvo.gd" id="2_m8dx3"]
+[ext_resource type="Texture2D" uid="uid://bxv18ti8g5smq" path="res://assets/alquimista_renomado.png" id="3_s6aeq"]
+[ext_resource type="Texture2D" uid="uid://7fa1qetc2lna" path="res://assets/alquimista_curioso.png" id="4_kspip"]
+[ext_resource type="PackedScene" uid="uid://iqthrsotirxu" path="res://levels/ingrediente.tscn" id="4_qa7my"]
+[ext_resource type="Texture2D" uid="uid://d30c0ck5whvvu" path="res://assets/experimentador_azarado.png" id="5_dnvvn"]
+[ext_resource type="Texture2D" uid="uid://i2rpqqjfb1p2" path="res://assets/cogumelo_errado.png" id="5_oo8r0"]
+[ext_resource type="Texture2D" uid="uid://c3088qay4t647" path="res://assets/calendula.png" id="5_vefgb"]
+[ext_resource type="Texture2D" uid="uid://dl0khymhaga82" path="res://assets/hortela.png" id="6_xh1x1"]
+[ext_resource type="Texture2D" uid="uid://bc54ucbxmh7l2" path="res://assets/mel.png" id="7_5tgdy"]
+[ext_resource type="Texture2D" uid="uid://0mfxahn8l3es" path="res://assets/cogumelo_certo.png" id="7_j7ggm"]
+[ext_resource type="Texture2D" uid="uid://c1ggs02jut3n6" path="res://assets/gengibre.png" id="7_qicnr"]
+[ext_resource type="Texture2D" uid="uid://dlcfdo7dwgcch" path="res://assets/folha.png" id="8_bfxkp"]
+[ext_resource type="Texture2D" uid="uid://o06j7pxueoec" path="res://assets/oleo_cobra.png" id="8_lg2qn"]
+[ext_resource type="Texture2D" uid="uid://c2g8vmida8qxl" path="res://assets/sangue.png" id="9_52jyv"]
+[ext_resource type="Texture2D" uid="uid://dgcypi04airfj" path="res://assets/sangue_corvo.png" id="9_bbhlo"]
+[ext_resource type="Texture2D" uid="uid://pkk3xsbpgti0" path="res://assets/verme.png" id="10_aruh3"]
+[ext_resource type="Texture2D" uid="uid://d04pbbc8bl10e" path="res://assets/alho.png" id="10_d2y8s"]
+[ext_resource type="Texture2D" uid="uid://csbyylk6dxfmq" path="res://assets/azeite.png" id="15_rtgp4"]
+[ext_resource type="Texture2D" uid="uid://cgg3ru0bsykna" path="res://assets/cinzas_ossos.png" id="16_4fbdw"]
+[ext_resource type="PackedScene" uid="uid://u2848txj3vwu" path="res://levels/TelaResultado.tscn" id="22_q8kmo"]
+[ext_resource type="AudioStream" uid="uid://ccssau3bp3d82" path="res://assets/music/musica-medieval.mp3" id="23_h2w2t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74pec"]
+size = Vector2(313, 206.5)
+
+[node name="FaseReceita" type="Node2D"]
+
+[node name="FundoCenario" type="Sprite2D" parent="."]
+position = Vector2(516, 382)
+texture = ExtResource("1_1vveq")
+
+[node name="JarroAlvo" type="Area2D" parent="." groups=["pot_area"]]
+script = ExtResource("2_m8dx3")
+insignia_renomado = ExtResource("3_s6aeq")
+insignia_curioso = ExtResource("4_kspip")
+insignia_azarado = ExtResource("5_dnvvn")
+
+[node name="Jarro" type="Sprite2D" parent="JarroAlvo"]
+position = Vector2(521, 651)
+texture = ExtResource("2_4r4bf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JarroAlvo"]
+position = Vector2(520.5, 663.75)
+shape = SubResource("RectangleShape2D_74pec")
+
+[node name="Ingrediente" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(271, 566)
+scale = Vector2(1.2, 1.2)
+ingredient_name = "calendula"
+texture = ExtResource("5_vefgb")
+
+[node name="Ingrediente2" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(725, 551)
+ingredient_name = "cogumelo_errado"
+texture = ExtResource("5_oo8r0")
+
+[node name="Ingrediente3" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(247, 400)
+rotation = 1.309
+ingredient_name = "hortela"
+texture = ExtResource("6_xh1x1")
+
+[node name="Ingrediente4" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(379, 392)
+scale = Vector2(1.2, 1.2)
+ingredient_name = "mel"
+texture = ExtResource("7_5tgdy")
+
+[node name="Ingrediente5" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(524, 392)
+ingredient_name = "folha-morta"
+texture = ExtResource("8_bfxkp")
+
+[node name="Ingrediente6" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(793, 381)
+ingredient_name = "sangue_corvo"
+texture = ExtResource("9_bbhlo")
+
+[node name="Ingrediente7" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(247, 215)
+ingredient_name = "gengibre"
+texture = ExtResource("7_qicnr")
+
+[node name="Ingrediente8" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(371, 204)
+scale = Vector2(1.2, 1.2)
+ingredient_name = "oleo_cobra"
+texture = ExtResource("8_lg2qn")
+
+[node name="Ingrediente9" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(576, 209)
+ingredient_name = "sangue"
+texture = ExtResource("9_52jyv")
+
+[node name="Ingrediente10" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(709, 224)
+scale = Vector2(1.2, 1.2)
+ingredient_name = "alho"
+texture = ExtResource("10_d2y8s")
+
+[node name="Ingrediente11" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(848, 551)
+ingredient_name = "cogumelo_certo"
+texture = ExtResource("7_j7ggm")
+
+[node name="Ingrediente12" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(663, 378)
+ingredient_name = "cinzas-humanas"
+texture = ExtResource("16_4fbdw")
+
+[node name="Ingrediente13" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(460, 210)
+ingredient_name = "verme"
+texture = ExtResource("10_aruh3")
+
+[node name="Ingrediente14" parent="." instance=ExtResource("4_qa7my")]
+position = Vector2(819, 212)
+ingredient_name = "azeite"
+texture = ExtResource("15_rtgp4")
+
+[node name="TelaResultado" parent="." instance=ExtResource("22_q8kmo")]
+
+[node name="ContadorLabel" type="Label" parent="."]
+offset_left = 296.0
+offset_top = 719.0
+offset_right = 497.0
+offset_bottom = 753.0
+theme_override_font_sizes/font_size = 24
+text = "0/6"
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_h2w2t")
+autoplay = true

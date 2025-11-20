@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvjo281jhx387"]
+
+[ext_resource type="Script" path="res://levels/MenuPrincipal.gd" id="1_8qtpe"]
+[ext_resource type="Texture2D" uid="uid://5wynbn8xg3ko" path="res://assets/vilarejo.png" id="2_ju23r"]
+[ext_resource type="FontFile" uid="uid://djy146x3wurjd" path="res://fonts/Minecraftia-Regular.ttf" id="3_lwp4y"]
+[ext_resource type="AudioStream" uid="uid://cyigj72ie5jn2" path="res://assets/music/musica-fundo.mp3" id="3_tdl8u"]
+[ext_resource type="AudioStream" uid="uid://nty6if2jsrwl" path="res://assets/music/Botao-click.mp3" id="4_8bgho"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvfgo"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.14902, 0.101961, 0.0117647, 0.784314)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[node name="MenuPrincipal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8qtpe")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 770.0
+texture = ExtResource("2_ju23r")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.409
+anchor_top = 0.419
+anchor_right = 0.409
+anchor_bottom = 0.419
+offset_left = -101.816
+offset_top = -182.63
+offset_right = 198.184
+offset_bottom = 217.37
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rvfgo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_lwp4y")
+text = "O Último Viajante
+"
+horizontal_alignment = 1
+
+[node name="JogarButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_lwp4y")
+text = "Jogar"
+
+[node name="SairButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_lwp4y")
+text = "Sair"
+
+[node name="CreditsLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_lwp4y")
+theme_override_font_sizes/font_size = 12
+text = "Feito pelo Grupo 1"
+horizontal_alignment = 1
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tdl8u")
+autoplay = true
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_8bgho")
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/JogarButton" to="." method="_on_jogar_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/SairButton" to="." method="_on_sair_button_pressed"]

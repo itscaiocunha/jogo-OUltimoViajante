@@ -1,0 +1,106 @@
+[gd_scene load_steps=17 format=3 uid="uid://bpgfy00o0er5k"]
+
+[ext_resource type="Texture2D" uid="uid://5wynbn8xg3ko" path="res://assets/vilarejo.png" id="1_m3u7p"]
+[ext_resource type="Script" path="res://levels/VilaManager.gd" id="1_tqfyr"]
+[ext_resource type="Texture2D" uid="uid://p1r8yp363vqk" path="res://assets/rato-sprite.png" id="2_accke"]
+[ext_resource type="PackedScene" uid="uid://mlnpfn36xi14" path="res://levels/personagem.tscn" id="2_f6tsf"]
+[ext_resource type="PackedScene" uid="uid://dr6pmp2rjbrb7" path="res://levels/CasaInterativa.tscn" id="3_ltrcd"]
+[ext_resource type="Texture2D" uid="uid://c27bs0tsy1olj" path="res://assets/hildegart-sprite.png" id="4_72omu"]
+[ext_resource type="Texture2D" uid="uid://8rq44lvk6qrn" path="res://assets/boticario-sprite.png" id="5_txvuj"]
+[ext_resource type="Texture2D" uid="uid://dfl2eil45os1d" path="res://assets/medico-sprite.png" id="6_y55kd"]
+[ext_resource type="Texture2D" uid="uid://dsulm5l0bpj5j" path="res://assets/cientista-sprite.png" id="7_oekve"]
+[ext_resource type="PackedScene" uid="uid://drtg0c1p43psh" path="res://cenas/Cena03_Hildegard.tscn" id="9_fhc5l"]
+[ext_resource type="PackedScene" uid="uid://ujvwgkwpaye2" path="res://cenas/Cena04_Medico.tscn" id="11_xp0vy"]
+[ext_resource type="PackedScene" uid="uid://6dh4pra7fmdx" path="res://cenas/Cena05_Boticario.tscn" id="12_xk5aj"]
+[ext_resource type="PackedScene" uid="uid://5sb02706gg45" path="res://cenas/Cena06_MedicoIgreja.tscn" id="13_tdcuh"]
+[ext_resource type="AudioStream" uid="uid://ccssau3bp3d82" path="res://assets/music/musica-medieval.mp3" id="14_ayo1q"]
+[ext_resource type="PackedScene" uid="uid://by3kfihubhbt7" path="res://cenas/Cena07_Despedida.tscn" id="14_hetbo"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_fmq10"]
+vertices = PackedVector2Array(179, 612.75, 28.8906, 616.453, 37.7734, 605.867, 170.227, 602.109, 187.594, 618.023, 179, 654.781, 185.039, 646.078, 394.906, 650.219, 346.156, 644.93, 214.273, 175.711, 211.328, 67.2578, 231.313, 71.2578, 235.367, 175.781, 392.883, 630.867, 370, 624.93, 663.227, 626.922, 662.719, 633.891, 366.078, 432.07, 370, 444.039, 342.844, 441.883, 343.094, 430, -64, 178, -64, 71.5469, -46.7266, 72.4922, -43.7109, 176, 12.7578, 432.297, 13.75, 389.727, 36.1484, 391.367, 41.2266, 430, 339.961, 178.242, 340.953, -57.4688, 362.078, -58.5, 340.906, 191.023, 67.8125, 176, 69.7891, 73.5469, 86.2578, 74.4609, 89.2891, 179.281, -86.6719, 190.023, -86.2969, 178, 904.297, 430.078, 904.672, 442.031, 677.219, 432.094, 653.906, 205.742, 672.219, 205.258, 651.906, 429.93, -86.7188, 446.867, -86.2578, 429.297)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4), PackedInt32Array(5, 0, 4, 6), PackedInt32Array(7, 5, 6, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 7, 8, 14), PackedInt32Array(14, 15, 16, 13), PackedInt32Array(17, 18, 14, 8, 19, 20), PackedInt32Array(21, 22, 23, 24), PackedInt32Array(25, 26, 27, 28), PackedInt32Array(29, 30, 31, 17, 32), PackedInt32Array(33, 34, 35, 36), PackedInt32Array(32, 37, 38, 21), PackedInt32Array(32, 21, 24, 36), PackedInt32Array(39, 40, 18, 41), PackedInt32Array(42, 43, 41, 44), PackedInt32Array(44, 41, 18, 17), PackedInt32Array(45, 46, 25), PackedInt32Array(19, 45, 25, 28, 20), PackedInt32Array(17, 20, 32), PackedInt32Array(9, 12, 29, 32, 36), PackedInt32Array(24, 33, 36)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(331, -67, 372, -69, 376, 422, 642, 420, 644, 196, 682, 195, 687, 422, 914, 420, 915, 452, 380, 454, 380, 615, 674, 617, 672, 644, 404, 641, 406, 660, 169, 665, 169, 623, 7, 627, 33, 596, 174, 592, 198, 614, 196, 636, 336, 635, 333, 452, -97, 457, -96, 419, 3, 422, 4, 379, 45, 382, 50, 420, 333, 420, 331, 201, -97, 200, -96, 168, -74, 168, -74, 61, -37, 63, -34, 166, 58, 166, 60, 63, 96, 65, 99, 169, 204, 166, 201, 55, 241, 63, 245, 166, 330, 168)])
+
+[node name="vilarejo" type="Node2D" node_paths=PackedStringArray("hildegard_inicio", "medico_centro", "boticario", "medico_igreja", "hildegard_final") groups=["vilarejo"]]
+script = ExtResource("1_tqfyr")
+hildegard_inicio = NodePath("Hildegard_Interact")
+medico_centro = NodePath("Medico_Centro_Interact")
+boticario = NodePath("Boticario_Interact")
+medico_igreja = NodePath("Medico_Igreja_Interact")
+hildegard_final = NodePath("Hildegard_Final_Interact")
+
+[node name="Vilarejo" type="Sprite2D" parent="."]
+position = Vector2(508, 385)
+scale = Vector2(1, 1.05205)
+texture = ExtResource("1_m3u7p")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Vilarejo"]
+position = Vector2(-411, -298)
+navigation_polygon = SubResource("NavigationPolygon_fmq10")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_f6tsf")]
+position = Vector2(448, 62)
+
+[node name="Hildegart_sprite" type="Sprite2D" parent="."]
+position = Vector2(798, 694)
+scale = Vector2(0.205556, 0.185)
+texture = ExtResource("4_72omu")
+
+[node name="Boticario_sprite" type="Sprite2D" parent="."]
+position = Vector2(120, 456)
+scale = Vector2(0.207461, 0.183211)
+texture = ExtResource("5_txvuj")
+
+[node name="Medico_Centro_Sprite" type="Sprite2D" parent="."]
+position = Vector2(483, 491)
+scale = Vector2(0.171569, 0.155637)
+texture = ExtResource("6_y55kd")
+
+[node name="Medico_Igreja_Sprite" type="Sprite2D" parent="."]
+position = Vector2(772, 260)
+scale = Vector2(0.172, 0.156)
+texture = ExtResource("6_y55kd")
+
+[node name="Cientista_sprite" type="Sprite2D" parent="."]
+position = Vector2(486, 29)
+scale = Vector2(0.153553, 0.13625)
+texture = ExtResource("7_oekve")
+
+[node name="Rato_sprite" type="Sprite2D" parent="."]
+position = Vector2(49, 125)
+scale = Vector2(0.045207, 0.0374828)
+texture = ExtResource("2_accke")
+
+[node name="Rato_sprite2" type="Sprite2D" parent="."]
+position = Vector2(274, 698)
+scale = Vector2(0.045207, 0.0394338)
+texture = ExtResource("2_accke")
+
+[node name="Rato_sprite3" type="Sprite2D" parent="."]
+position = Vector2(852, 424)
+scale = Vector2(0.045207, 0.0374828)
+texture = ExtResource("2_accke")
+
+[node name="Hildegard_Interact" parent="." instance=ExtResource("3_ltrcd")]
+position = Vector2(796, 708)
+target_scene = ExtResource("9_fhc5l")
+
+[node name="Medico_Centro_Interact" parent="." instance=ExtResource("3_ltrcd")]
+position = Vector2(485, 496)
+target_scene = ExtResource("11_xp0vy")
+
+[node name="Boticario_Interact" parent="." instance=ExtResource("3_ltrcd")]
+position = Vector2(122, 453)
+target_scene = ExtResource("12_xk5aj")
+
+[node name="Medico_Igreja_Interact" parent="." instance=ExtResource("3_ltrcd")]
+position = Vector2(772, 264)
+target_scene = ExtResource("13_tdcuh")
+
+[node name="Hildegard_Final_Interact" parent="." instance=ExtResource("3_ltrcd")]
+position = Vector2(1592, 1416)
+target_scene = ExtResource("14_hetbo")
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_ayo1q")
+autoplay = true

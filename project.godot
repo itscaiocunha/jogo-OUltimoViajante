@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="jogo-ultimoviajante"
-run/main_scene="res://MenuPrincipal.tscn"
+run/main_scene="res://levels/MenuPrincipal.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://GameManager.gd"
+GameManager="*res://configs/GameManager.gd"
 
 [display]
 
