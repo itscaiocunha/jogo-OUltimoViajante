@@ -12,26 +12,30 @@ extends Node2D
 @onready var avancar_button = $UIScript/BalaoFala/AvancarButton
 
 var is_transitioning = false
+var typing := false
+var type_speed := 0.03
 
-# --- Diálogos da CENA 5 ---
+# Diálogos da CENA 5
 var dialog_lines = [
-	{"speaker": "VIAJANTE", "text": "Boa tarde, o médico me enviou — preciso preparar um remédio com urgência!"}, # 0
-	{"speaker": "BOTICÁRIO", "text": "Estamos fechando, mas… se foi o doutor quem te enviou, entra.\nUse esta mesa — e cuidado com as proporções."}, # 1
-	{"speaker": "NARRADOR", "text": "(Task de mistura dos ingredientes.)"}, # 2 (A Task)
-	{"speaker": "VIAJANTE", "text": "Pronto! Acho que consegui."} # 3
+	{"speaker": "VIAJANTE", "text": "Boa tarde, o médico me enviou! preciso preparar um remédio com urgência!"},
+	{"speaker": "BOTICÁRIO", "text": "Estamos fechando, mas… se foi o doutor quem te enviou, entra.\nUse esta mesa — e cuidado com as proporções."},
+	{"speaker": "NARRADOR", "text": "(Task de mistura dos ingredientes.)"},
+	{"speaker": "VIAJANTE", "text": "Pronto! Acho que consegui."}
 ]
 
 var current_dialog_index = 0
 
 func _ready():
 	avancar_button.pressed.connect(func():
+		if typing:
+			skip_typewriter()
+			return
 		if is_transitioning: return
 		show_next_dialog_line()
 	)
 	
 	set_process_unhandled_input(true)
 
-	# Lógica de Retorno (para depois do Drag&Drop)
 	if GameManager.resume_dialogue_index > 0:
 		current_dialog_index = GameManager.resume_dialogue_index
 		GameManager.resume_dialogue_index = 0
@@ -41,10 +45,11 @@ func _ready():
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		if is_transitioning: return
-		if current_dialog_index < dialog_lines.size(): 
-			show_next_dialog_line()
+
+		if typing:
+			skip_typewriter()
 		else:
-			print("Diálogo finalizado, aguardando transição...")
+			show_next_dialog_line()
 
 func start_scene():
 	viajante_sprite.modulate.a = 1.0
@@ -54,48 +59,75 @@ func start_scene():
 	is_transitioning = false
 	show_next_dialog_line()
 
+# -------------------------------------------------------
+# TYPEWRITER
+# -------------------------------------------------------
+func typewriter(text: String) -> void:
+	typing = true
+
+	# 🔥 IMPORTANTE: definir o texto ANTES de usar visible_characters
+	texto_dialogo_label.text = text
+	texto_dialogo_label.visible_characters = 0
+
+	for i in range(text.length()):
+		if not typing:
+			# 🔥 IMPORTANTE: força mostrar tudo
+			texto_dialogo_label.visible_characters = text.length()
+			return
+
+		texto_dialogo_label.visible_characters = i + 1
+		await get_tree().create_timer(type_speed).timeout
+
+	typing = false
+
+func skip_typewriter():
+	typing = false
+	texto_dialogo_label.visible_characters = texto_dialogo_label.text.length()
+
+# -------------------------------------------------------
+# DIÁLOGO
+# -------------------------------------------------------
 func show_next_dialog_line():
+	if typing: return
+
 	if current_dialog_index >= dialog_lines.size():
 		hide_dialog_box()
 		end_scene()
 		return
 
-	# Lógica da Task (Índice 2)
-	if current_dialog_index == 2: 
-		is_transitioning = true 
+	# Task de mistura (índice 2)
+	if current_dialog_index == 2:
+		is_transitioning = true
 		hide_dialog_box()
-		
-		# 1. Diz ao GameManager para onde voltar (a próxima fala, índice 3)
-		GameManager.resume_dialogue_index = 3 
-		
-		# 2. DIZ AO JOGO DE DRAG&DROP PARA VOLTAR AQUI (Cena 5)
-		GameManager.minigame_return_scene = "res://cenas/Cena05_Boticario.tscn"
-		
-		# 3. Chama o fade e muda de cena
-		fade_and_change_scene()
-		return 
 
-	var line_data = dialog_lines[current_dialog_index]
-	var speaker = line_data.speaker
-	var text = line_data.text
+		GameManager.resume_dialogue_index = 3
+		GameManager.minigame_return_scene = "res://cenas/Cena05_Boticario.tscn"
+
+		fade_and_change_scene()
+		return
+
+	var line = dialog_lines[current_dialog_index]
+	current_dialog_index += 1
 
 	balao_fala.visible = true
+	avancar_button.visible = true
 
-	if speaker == "NARRADOR":
+	if line.speaker == "NARRADOR":
 		nome_personagem_label.text = ""
 	else:
-		nome_personagem_label.text = speaker + ":"
-	
-	texto_dialogo_label.text = text
+		nome_personagem_label.text = line.speaker + ":"
 
-	current_dialog_index += 1
+	# 🔥 IMPORTANTE: REMOVIDO “texto_dialogo_label.text = line.text”
+	# Agora o typewriter controla todo o texto
+
+	await typewriter(line.text)
 
 func fade_and_change_scene():
 	var tween = create_tween()
-	tween.tween_property(fade_efeito, "modulate:a", 1.0, 0.3) 
-	await tween.finished 
+	tween.tween_property(fade_efeito, "modulate:a", 1.0, 0.3)
+	await tween.finished
 	
-	get_tree().change_scene_to_file("res://levels/NivelReceita.tscn")
+	LevelLoader.carregar_cena("res://levels/NivelReceita.tscn")
 
 func hide_dialog_box():
 	balao_fala.visible = false
@@ -103,12 +135,9 @@ func hide_dialog_box():
 
 func end_scene():
 	is_transitioning = true
-	set_process_unhandled_input(false) 
+	set_process_unhandled_input(false)
+
 	GameManager.resume_dialogue_index = 0
-	
-	print("Cena 5 finalizada! Voltando para a vila JOGÁVEL...")
-	
-	if GameManager:
-		GameManager.quest_status = "remedio_pronto" 
-	
-	get_tree().change_scene_to_file("res://levels/vilarejo.tscn")
+	GameManager.quest_status = "remedio_pronto"
+
+	LevelLoader.carregar_cena("res://levels/vilarejo.tscn")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://h7wbvjrnmybp"]
+[gd_scene load_steps=5 format=3 uid="uid://h7wbvjrnmybp"]
 
 [ext_resource type="Script" path="res://cenas/CreditosLabel.gd" id="1_xr3bs"]
+[ext_resource type="Texture2D" uid="uid://w8dq33cjgcso" path="res://assets/cenario-credito.png" id="2_1t4b1"]
 [ext_resource type="AudioStream" uid="uid://cyigj72ie5jn2" path="res://assets/music/musica-fundo.mp3" id="2_mpy05"]
 [ext_resource type="FontFile" uid="uid://djy146x3wurjd" path="res://fonts/Minecraftia-Regular.ttf" id="2_pqmfh"]
 
@@ -13,32 +14,33 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xr3bs")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(20, 20)
-color = Color(0, 0, 0, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(512, 384)
+texture = ExtResource("2_1t4b1")
 
-[node name="CreditosLabel" type="RichTextLabel" parent="."]
+[node name="MascaraCreditos" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 309.0
+offset_right = 1023.0
+offset_bottom = 766.0
+
+[node name="CreditosLabel" type="RichTextLabel" parent="MascaraCreditos"]
 custom_minimum_size = Vector2(600, 800)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -300.0
-offset_top = 48.0
-offset_right = 300.0
-offset_bottom = 848.0
+offset_left = -285.0
+offset_top = 62.0
+offset_right = 315.0
+offset_bottom = 862.0
 grow_horizontal = 2
 theme_override_fonts/normal_font = ExtResource("2_pqmfh")
 theme_override_font_sizes/normal_font_size = 24
-text = "O ÚLTIMO VIAJANTE
-
-Desenvolvimento e Direção: Caio Grilo da Cunha
+text = "Desenvolvimento e Direção: Caio Grilo da Cunha
 
 Roteiro: Haryel Araújo de Oliveira Caliari
 

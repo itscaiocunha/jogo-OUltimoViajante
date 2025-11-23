@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbnrpsxhyemr7"]
+[gd_scene load_steps=11 format=3 uid="uid://bbnrpsxhyemr7"]
 
 [ext_resource type="Script" path="res://cenas/IntroScene.gd" id="1_5s011"]
 [ext_resource type="Texture2D" uid="uid://cu8p4clmxi70o" path="res://assets/quarto-viajante.png" id="1_57ttn"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://clegwij12x6ga" path="res://assets/music/musica-quarto.mp3" id="6_gvn1x"]
 [ext_resource type="FontFile" uid="uid://djy146x3wurjd" path="res://fonts/Minecraftia-Regular.ttf" id="6_qqvib"]
 [ext_resource type="AudioStream" uid="uid://dg64vcjpv5r4k" path="res://assets/music/musica-portal.mp3" id="7_0td3f"]
+[ext_resource type="AudioStream" uid="uid://c8ojlgwnt1xwk" path="res://assets/music/musica-cidade.mp3" id="10_5nkuw"]
 
 [node name="IntroScene" type="Node2D"]
 script = ExtResource("1_5s011")
@@ -89,3 +90,7 @@ autoplay = true
 
 [node name="PortalSFXPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_0td3f")
+
+[node name="AmbienceCity" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_5nkuw")
+autoplay = true

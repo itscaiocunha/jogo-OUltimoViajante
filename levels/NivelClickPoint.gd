@@ -1,38 +1,23 @@
 extends Node2D
 
-# Carregamos o script do ItemClicavel para acessar o enum
 const ItemClicavel = preload("res://levels/ItemClicavel.gd")
 
-# Caminho do container do papiro
 @onready var container_da_lista = $CanvasLayer/PapiroFundo/VBoxContainer
 
-# Variáveis de progresso (valores padrão; serão substituídos pelo TXT)
 var quest_items_restantes = 5
 var lixo_encontrado = 0
 var lixo_total = 7
 
-# Dicionário para armazenar dados do DSL
 var config_nivel = {}
 
-# =========================================================
-# =====================  READY() ==========================
-# =========================================================
 func _ready():
 	# Carrega configurações do arquivo texto
 	config_nivel = carregar_configuracao_nivel("res://configs/nivel_hildegard.txt")
 	aplicar_configuracoes()
 
-	# Atualiza UI
 	update_lixo_counter()
 
-	# Conecta sinal de clique
 	get_tree().call_group("itens_clicaveis", "connect", "item_foi_clicado", _on_item_clicado)
-
-
-
-# =========================================================
-# ========================  DSL  ===========================
-# =========================================================
 
 func carregar_configuracao_nivel(caminho):
 	var dados = {}
@@ -67,19 +52,12 @@ func carregar_configuracao_nivel(caminho):
 
 	return dados
 
-
 func aplicar_configuracoes():
 	if config_nivel.has("qtde_lixos"):
 		lixo_total = config_nivel["qtde_lixos"]
 
 	if config_nivel.has("qtde_doentes"):
 		quest_items_restantes = config_nivel["qtde_doentes"]
-
-
-
-# =========================================================
-# ================= LÓGICA DE CLIQUE ======================
-# =========================================================
 
 func _on_item_clicado(item_name_clicado, item_type):
 
@@ -110,12 +88,6 @@ func _on_item_clicado(item_name_clicado, item_type):
 
 	check_win_condition()
 
-
-
-# =========================================================
-# ========================  UI  ===========================
-# =========================================================
-
 func update_lixo_counter():
 	var lixo_label = container_da_lista.get_node("LixoCounterLabel")
 
@@ -123,18 +95,9 @@ func update_lixo_counter():
 		lixo_label.text = "Lixos: %d / %d" % [lixo_encontrado, lixo_total]
 	else:
 		print("ERRO: Não achei LixoCounterLabel dentro de ", container_da_lista.get_path())
-
-
-
-# =========================================================
-# =====================  VITÓRIA  =========================
-# =========================================================
-
+		
 func check_win_condition():
 	if quest_items_restantes == 0 and lixo_encontrado >= lixo_total:
-
 		print("PARABÉNS! Você salvou os enfermos e limpou a área!")
-
 		set_process_unhandled_input(false)
-
-		get_tree().change_scene_to_file("res://cenas/Cena03_Hildegard.tscn")
+		LevelLoader.carregar_cena("res://cenas/Cena03_Hildegard.tscn")

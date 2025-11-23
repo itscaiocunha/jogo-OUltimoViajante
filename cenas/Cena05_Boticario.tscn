@@ -13,7 +13,6 @@ script = ExtResource("1_nsq5t")
 
 [node name="FarmaciaCenario" type="Sprite2D" parent="."]
 position = Vector2(468, 228)
-scale = Vector2(3.888, 3.47)
 texture = ExtResource("1_kn5dp")
 
 [node name="ViajanteSprite" type="Sprite2D" parent="."]

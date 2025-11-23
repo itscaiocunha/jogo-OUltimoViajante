@@ -3,9 +3,9 @@ extends Node2D
 # Referências para os nós da cena
 @onready var viajante_sprite = $ViajanteSprite
 @onready var bruxo_sprite = $BruxoSprite
-@onready var fagulhas_sprite = $FagulhasSprite # Certifique-se de ter este nó
+@onready var fagulhas_sprite = $FagulhasSprite
 
-# Referências da UI (copiadas da IntroScene)
+# Referências da UI
 @onready var balao_fala = $UIScript/BalaoFala
 @onready var nome_personagem_label = $UIScript/BalaoFala/NomePersonagemLabel
 @onready var texto_dialogo_label = $UIScript/BalaoFala/TextoDialogoLabel
@@ -25,32 +25,58 @@ var dialog_lines = [
 ]
 
 var current_dialog_index = 0
+var is_typing := false
+var typing_speed := 0.03
+
 
 func _ready():
-	# Conecta o botão de avançar
 	avancar_button.pressed.connect(show_next_dialog_line)
-	# Permite avançar clicando em qualquer lugar
 	set_process_unhandled_input(true)
-
-	# Inicia a cena
 	start_scene()
+
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed:
+		if is_typing:
+			# pula direto pro texto completo
+			is_typing = false
+			texto_dialogo_label.text = dialog_lines[current_dialog_index]["text"]
+			return
+		
 		if current_dialog_index < dialog_lines.size(): 
 			show_next_dialog_line()
 		else:
 			print("Diálogo finalizado, aguardando transição...")
 
+
 func start_scene():
-	# Garante que os personagens estejam visíveis e as fagulhas não
 	viajante_sprite.modulate.a = 1.0
 	bruxo_sprite.modulate.a = 1.0	
 	balao_fala.visible = false
 
-	# Começa o diálogos
 	show_next_dialog_line()
 
+
+# ------------------------------------------------------------
+# TYPEWRITER (SEM SOM)
+# ------------------------------------------------------------
+func typewriter_text(full_text: String) -> void:
+	is_typing = true
+	texto_dialogo_label.text = ""
+
+	for i in full_text.length():
+		if not is_typing:
+			# caso o jogador tenha pulado
+			texto_dialogo_label.text = full_text
+			return
+		
+		texto_dialogo_label.text += full_text[i]
+		await get_tree().create_timer(typing_speed).timeout
+
+	is_typing = false
+
+
+# ------------------------------------------------------------
 func show_next_dialog_line():
 	if current_dialog_index >= dialog_lines.size():
 		hide_dialog_box()
@@ -67,30 +93,15 @@ func show_next_dialog_line():
 		nome_personagem_label.text = ""
 	else:
 		nome_personagem_label.text = speaker + ":"
-	
-	texto_dialogo_label.text = text
 
-	# --- Lógica de eventos visuais ---
-	
-	# Esta é a fala 9 (índice 9), a narração do bruxo desaparecendo
-	if current_dialog_index == 9: 
-		# Esconde o balão de fala para o efeito
-		hide_dialog_box()
-		
-		# Animação de desaparecimento
-		var tween = create_tween()
-		tween.tween_property(fagulhas_sprite, "visible", true, 0.0)
-		# Você pode adicionar uma animação de "modulate.a" para as fagulhas
-		tween.tween_property(bruxo_sprite, "modulate:a", 0.0, 0.5) # Bruxo some
-		tween.tween_interval(0.5)
-		tween.tween_property(fagulhas_sprite, "visible", false, 0.0) # Fagulhas somem
-		
-		# Quando a animação acabar, chama o próximo diálogo
-		tween.tween_callback(show_next_dialog_line)
+	# Mostra texto digitando
+	await typewriter_text(text)
 
-		# IMPORTANTE: Pula o incremento normal para a 'tween_callback' cuidar
-		current_dialog_index += 1
-		return # Sai da função para não mostrar o texto da fala 9
+	# -------------------------
+	# EVENTOS VISUAIS
+	# -------------------------
+
+	# (nada especial aqui na Cena 2 até a fala 8)
 
 	current_dialog_index += 1
 
@@ -99,10 +110,8 @@ func hide_dialog_box():
 	balao_fala.visible = false
 	avancar_button.visible = false
 
+
 func end_scene():
 	set_process_unhandled_input(false) 
-	
 	print("Cena 2 finalizada! Carregando a vila JOGÁVEL...")
-	
-	# AGORA SIM, CARREGA A VILA JOGÁVEL
-	get_tree().change_scene_to_file("res://levels/vilarejo.tscn")
+	LevelLoader.carregar_cena("res://levels/vilarejo.tscn")

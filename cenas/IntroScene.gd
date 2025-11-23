@@ -28,6 +28,10 @@ var dialog_lines = [
 	{"speaker": "NARRADOR", "text": "O bruxo ativa um dispositivo em suas mãos — o chão sob o viajante se abre num clarão. Ele cai, gritando."}
 ]
 
+var typing_speed := 0.03 
+var is_typing := false
+var typing_tween : Tween
+
 var current_dialog_index = 0
 
 func _ready():
@@ -40,14 +44,40 @@ func _ready():
 	# Chamamos a função de início (que mostrará a primeira fala)
 	start_intro_sequence()
 	# --------------------
+	
+
+func typewriter_text(full_text: String) -> void:
+	if is_typing:
+		return
+
+	is_typing = true
+	texto_dialogo_label.text = ""
+
+	var length := full_text.length()
+
+	for i in length:
+		# adiciona letra
+		texto_dialogo_label.text += full_text[i]
+
+		# espera o tempo por letra ANTES de continuar
+		await get_tree().create_timer(typing_speed).timeout
+
+	is_typing = false
 
 func _unhandled_input(event):
-	# Se clicar em qualquer lugar da tela E o diálogo não tiver acabado
 	if event is InputEventMouseButton and event.pressed:
-		if current_dialog_index < dialog_lines.size(): 
-			show_next_dialog_line()
-		else:
-			print("Diálogo finalizado, aguardando transição...")
+		
+		# Se está digitando → pula para o texto completo
+		if is_typing:
+			if typing_tween:
+				typing_tween.kill()
+			texto_dialogo_label.text = dialog_lines[current_dialog_index]["text"]
+			is_typing = false
+			return
+		
+		# Se não está digitando → avança diálogo
+		show_next_dialog_line()
+
 
 # --- CORREÇÃO AQUI ---
 func start_intro_sequence():
@@ -64,7 +94,7 @@ func start_intro_sequence():
 # --------------------
 
 # --- CORREÇÃO PRINCIPAL AQUI ---
-func show_next_dialog_line():
+func show_next_dialog_line() -> void:
 	# Se o diálogo terminou, chama a função de finalização
 	if current_dialog_index >= dialog_lines.size():
 		hide_dialog_box()
@@ -84,7 +114,7 @@ func show_next_dialog_line():
 	
 	# NÃO mostre o texto do bruxo ainda, se for a hora dos eventos
 	if current_dialog_index != 2:
-		texto_dialogo_label.text = text
+		await typewriter_text(text)
 
 	# --- Lógica de eventos visuais ---
 	
@@ -149,4 +179,4 @@ func end_intro_sequence():
 	set_process_unhandled_input(false) 
 	
 	print("Introdução finalizada! Carregando a Cena 2...")
-	get_tree().change_scene_to_file("res://cenas/Cena02_Medieval.tscn")
+	LevelLoader.carregar_cena("res://cenas/Cena02_Medieval.tscn")
