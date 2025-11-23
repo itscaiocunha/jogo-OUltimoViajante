@@ -4,7 +4,7 @@
 O jogador controla um estudante universitário moderno transportado para o ano de **1347**, durante a **Peste Negra**, e deve usar seu conhecimento para ajudar os habitantes de uma vila medieval.
 
 <p >
-  <img src="assets/cenario-credito.png" width="600" alt="Cenário do jogo O Último Viajante">
+  <img src="https://w7startup.com.br/img/Tedie/capa-logo.png" width="600" alt="Cenário do jogo O Último Viajante">
 </p>
 
 ---
