@@ -3,6 +3,10 @@
 **O Último Viajante** é um jogo narrativo de aventura e puzzle 2D desenvolvido na **Godot Engine 4.3**.  
 O jogador controla um estudante universitário moderno transportado para o ano de **1347**, durante a **Peste Negra**, e deve usar seu conhecimento para ajudar os habitantes de uma vila medieval.
 
+<p >
+  <img src="assets/cenario-credito.png" width="600" alt="Cenário do jogo O Último Viajante">
+</p>
+
 ---
 
 ## 📋 Sobre o Projeto

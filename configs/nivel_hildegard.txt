@@ -1,1 +1,1 @@
-qtde_lixos = 2
+qtde_lixos = 10
